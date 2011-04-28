@@ -2,33 +2,19 @@ SHMVC stands for Simple, Hierarchical Model-View-Controller
 
 It's a PHP framework for making websites. Simple.
 
-# FAQs
+# [FAQs](https://github.com/dave1010/shmvc/blob/master/FAQs.md)
 
-## What are SHMVC's aims?
+# [License](https://github.com/dave1010/shmvc/blob/master/LICENSE.txt)
 
-- Easy to set up and create a basic app
-- Extendibility (plugins) and extensibility (ready for future development)
-- Speed (many requests per second)
-- Lightweight (only a few kb to get a fully working site)
-- Introduce people to PHP 5.3's namespaces and the HMVC design pattern
-- Have an extensive test suite (PHPUnit)
-- Drop in to an existing project, without conflicting with anything
+# Features
 
-## Why Hierachial?
-
-MVC is great but web pages are a collection of nested MVC blocks.
-
-## Why not CodeIgniter / Kohana / Symphony / Zend / FUEL / ... ?
-
-SHMVC has different aims.
-
-## Is it ready for production?
-
-Not yet.
-
-## How can I help?
-
-Test it, report issues, submit pull requests, write documentation.
+- Nice autoloading of classes
+- Plugin system (loaded before routing is done)
+- Controllers and basic views
+- Default routing of URLs to controllers
+- Custom routing, including parameters
+- A configuration store (`config()`)
+- Helpers (helper classes, like Kohana)
 
 # Getting started
 
@@ -64,21 +50,16 @@ Helpers are normal classes that are used from a models/views/controllers, simila
 
     echo \Shmvc\Helper\Text::escape('>');
 
-# Features
+Or import the helper's namespace first:
 
-- Nice autoloading of classes
-- Plugin system (loaded before routing is done)
-- Controllers and basic views
-- Default routing of URLs to controllers
-- Custom routing, including parameters
-- A configuration store (`config()`)
+    use \Shmvc\Helper\Text;
+    echo Text::escape('>');
 
 # TODO
 
 - Hierachial views: Go up view folder structure to get parent (container views)
 - Make sub-requests work nicely (the H in HMVC)
 - Filters
-- Helpers (helper classes, like Kohana)
 - DB class
 - ORM class
 - Models extending from ORM
