@@ -12,6 +12,7 @@ It's a PHP framework for making websites. Simple.
 - Lightweight (only a few kb to get a fully working site)
 - Introduce people to PHP 5.3's namespaces and the HMVC design pattern
 - Have an extensive test suite (PHPUnit)
+- Drop in to an existing project, without conflicting with anything
 
 ## Why Hierachial?
 
@@ -45,6 +46,24 @@ Test it, report issues, submit pull requests, write documentation.
     Shmvc - system files
     index.php - single bootsrap file
 
+# Plugins
+
+Plugins are similar to WordPress plugins. All .php files in the `plugins` folder are automatically included. They are loaded after the autoloader is set up (so they can use any class) but before any URL routing is done.
+
+Plugins can either hook into actions:
+
+    \Shmvc\add_action('hook_name', 'my_plugin_action');
+
+Or filter variables:
+
+    \Shmvc\add_filter('hook_name', 'my_plugin_filter', $variable);
+
+# Helpers
+
+Helpers are normal classes that are used from a models/views/controllers, similar to Kohana helpers. E.g.
+
+    echo \Shmvc\Helper\Text::escape('>');
+
 # Features
 
 - Nice autoloading of classes
@@ -56,13 +75,16 @@ Test it, report issues, submit pull requests, write documentation.
 
 # TODO
 
-- Go up view folder structure to get parent (container views)
-- Sub-requests
+- Hierachial views: Go up view folder structure to get parent (container views)
+- Make sub-requests work nicely (the H in HMVC)
 - Filters
-- Demo plugins (e.g. caching)
-- Helpers (helper classes)
-- Demo app
-- Documentation
+- Helpers (helper classes, like Kohana)
 - DB class
 - ORM class
 - Models extending from ORM
+- Demo plugins (e.g. caching)
+- Demo app
+- Documentation
+
+
+
