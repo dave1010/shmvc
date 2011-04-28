@@ -1,6 +1,6 @@
 SHMVC stands for Simple, Hierarchical Model-View-Controller
 
-It's a PHP framework for making 
+It's a PHP framework for making websites. Simple.
 
 # FAQs
 
@@ -50,7 +50,6 @@ index.php
 
 - Go up view folder structure to get parent (container views)
 - Sub-requests
-- License (BSD/MIT)
 - Plugins (loaded before routing is done, e.g. caching)
 - Helpers (helper classes)
 - Demo app
