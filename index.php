@@ -58,9 +58,47 @@ function config($k = null, $v = null) {
 }
 config();
 
+$GLOBALS['actions'] = array();
+$GLOBALS['filters'] = array();
+
+function add_action($name, $fn) {
+	$GLOBALS['actions'][$name][] = $fn;
+}
+
+function add_filter($name, $fn) {
+	$GLOBALS['filters'][$name][] = $fn;
+}
+
+function do_action($name) {
+	if (empty($GLOBALS['actions'][$name])) {
+		return;
+	}
+
+	foreach ($GLOBALS['actions'][$name] as $fn) {
+		call_user_func($fn);
+	}
+}
+
+function do_filter($name, $variable) {
+	// TODO: implement
+	return $variable;
+}
+
+function load_plugins() {
+	$files = glob(PATH_ROOT . '/plugins/*.php');
+	sort($files);
+	foreach ($files as $file) {
+		@include $file;
+	}
+}
+load_plugins();
+
+do_action('plugins_loaded');
+
 function route() {
 	$uri = URI;
 	$routes = require_once PATH_ROOT . '/config/routes.php';
+	$routes = do_filter('routes', $routes);
 	foreach ($routes as $k => $v) {
 		if (preg_match('~' . $k . '~', URI)) {
 			$uri = preg_replace('~' . $k . '~', $v, URI);
@@ -111,4 +149,4 @@ function dispatch($route) {
 
 $object = dispatch(ROUTE);
 
-
+do_action('end');

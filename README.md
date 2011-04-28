@@ -46,11 +46,21 @@ Shmvc
 	Controller.php
 index.php
 
+# Features
+
+- Nice autoloading of classes
+- Plugin system (loaded before routing is done)
+- Controllers and basic views
+- Default routing of URLs to controllers
+- Custom routing, including parameters
+- A configuration store (`config()`)
+
 # TODO
 
 - Go up view folder structure to get parent (container views)
 - Sub-requests
-- Plugins (loaded before routing is done, e.g. caching)
+- Filters
+- Demo plugins (e.g. caching)
 - Helpers (helper classes)
 - Demo app
 - Documentation
