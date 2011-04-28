@@ -37,14 +37,13 @@ Test it, report issues, submit pull requests, write documentation.
 
 # Folder structure
 
-App
-config
-	routes.php
-Plugin
-public
-Shmvc
-	Controller.php
-index.php
+    App - your models, controllers and views
+    config
+    	routes.php
+    plugins
+    public - js/css/images
+    Shmvc - system files
+    index.php - single bootsrap file
 
 # Features
 
