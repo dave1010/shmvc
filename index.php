@@ -7,7 +7,7 @@ function bootstrap() {
 	// file path on the server
 	define('PATH_ROOT', 		dirname(__FILE__));						
 
-	// path from the document root (eg "projects/wearebase.com" or "") to this index.php page
+	// path from the document root (eg "web-projects/example.com" or "") to this index.php page
 	define('SITE_DIR', 			str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']));	
 	// full URL of homepage (without 'http://')
 	define('SITE_URL', 			$_SERVER['HTTP_HOST'] . SITE_DIR);
@@ -62,6 +62,7 @@ $GLOBALS['actions'] = array();
 $GLOBALS['filters'] = array();
 
 function add_action($name, $fn) {
+// TODO: priorities
 	$GLOBALS['actions'][$name][] = $fn;
 }
 
@@ -69,6 +70,7 @@ function add_filter($name, $fn) {
 	$GLOBALS['filters'][$name][] = $fn;
 }
 
+// need to work out an extensible system for hook names. maybe namespaced
 function do_action($name) {
 	if (empty($GLOBALS['actions'][$name])) {
 		return;
@@ -85,9 +87,11 @@ function do_filter($name, $variable) {
 }
 
 function load_plugins() {
+	// TODO "safe mode" without plugins
 	$files = glob(PATH_ROOT . '/plugins/*.php');
-	sort($files);
+	sort($files); // TODO: document plugin system
 	foreach ($files as $file) {
+		// TODO: check for errors first or have way of "installing" plugins
 		@include $file;
 	}
 }
@@ -96,6 +100,7 @@ load_plugins();
 do_action('plugins_loaded');
 
 function route() {
+	// TODO: put in \Shmvc\Route class and write tests
 	$uri = URI;
 	$routes = require_once PATH_ROOT . '/config/routes.php';
 	$routes = do_filter('routes', $routes);
@@ -111,6 +116,7 @@ function route() {
 define ('ROUTE', route());
 
 function find_class($ns, $class) {
+	// TODO: write tests and maybe in its own class
 	$class = ltrim($class, '\\');
 	$ns = rtrim($ns, '\\');
 	$full_class = preg_replace('~(\\\\)+~', '\\', $ns . '\\' . $class);
